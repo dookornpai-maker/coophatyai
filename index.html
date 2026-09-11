@@ -176,7 +176,10 @@ button,input,select{font:inherit;color:inherit}
 /* new-member strip (navy) */
 .prep{background:var(--navy);color:var(--on-navy)}
 .prep .wrap{display:grid;gap:1rem 2.5rem;grid-template-columns:1fr;padding-block:1.5rem;align-items:center}
-@media (min-width:860px){.prep .wrap{grid-template-columns:auto 1fr}}
+@media (min-width:860px){.prep .wrap{grid-template-columns:auto 1fr auto}}
+.prep-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:600;color:var(--gold-l);white-space:nowrap;border-bottom:1px solid transparent}
+.prep-link:hover{border-bottom-color:var(--gold-l)}
+.prep-link .ic{width:.95rem;height:.95rem;stroke:var(--gold-l)}
 .prep h2{font-size:.9375rem;color:#fff;display:flex;align-items:center;gap:.55rem;white-space:nowrap}
 .prep h2 .ic{width:1.15rem;height:1.15rem;stroke:var(--gold-l)}
 .prep ol{display:grid;gap:.6rem 2rem;grid-template-columns:1fr}
@@ -285,6 +288,49 @@ button,input,select{font:inherit;color:inherit}
 .svc-photo{margin-top:2.5rem;position:relative;overflow:hidden}
 .svc-photo img{width:100%;height:clamp(11rem,22vw,15rem);object-fit:cover;object-position:center 55%}
 .svc-photo figcaption{position:absolute;inset:auto 0 0 0;padding:1.5rem 1.5rem 1.1rem;background:linear-gradient(0deg,rgba(12,23,70,.9),transparent);color:#fff;font-size:.8125rem;font-weight:500}
+
+/* ═══════════ FORMS & DOCUMENTS ═══════════ */
+.forms{border-top:1px solid var(--line)}
+.forms-grid{display:grid;gap:2.75rem;grid-template-columns:1fr}
+@media (min-width:960px){.forms-grid{grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:4rem}}
+.doc{display:grid;grid-template-columns:auto 1fr;gap:0 1.4rem;padding-block:1.6rem;border-top:1px solid var(--line);align-items:start}
+.doc:last-of-type{border-bottom:1px solid var(--line)}
+.doc-thumb{display:block;width:clamp(4.75rem,10vw,6.25rem);background:var(--sheet);border:1px solid var(--line);padding:.3rem .3rem .5rem;box-shadow:var(--sh-1);transform:rotate(-1.5deg);transition:transform .28s ease,box-shadow .28s ease}
+.doc:nth-of-type(even) .doc-thumb{transform:rotate(1.2deg)}
+.doc:hover .doc-thumb,.doc-thumb:focus-visible{transform:rotate(0);box-shadow:var(--sh-2)}
+.doc-thumb img{display:block;width:100%;aspect-ratio:210/297;object-fit:cover;object-position:top center;background:#fff}
+.doc-bd .lbl{font-family:'Noto Serif Thai',serif;font-size:.75rem;letter-spacing:.06em;color:var(--gold-t)}
+.doc-bd h3{font-size:1.0625rem;margin-top:.15rem}
+.doc-bd p{font-size:.8125rem;color:var(--ink-2);line-height:1.8;margin:.45rem 0 0}
+.doc-ft{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin-top:.9rem}
+.doc-ft .meta{font-family:'IBM Plex Mono',monospace;font-size:.6875rem;color:var(--ink-3);letter-spacing:.02em}
+.doc-ft .btn .ic{width:.95rem;height:.95rem}
+.chklist{margin-top:1.9rem;border:1px solid var(--line-2);background:var(--sheet-2);box-shadow:var(--sh-1)}
+.chklist h4{font-size:.9375rem;padding:.8rem 1.15rem;border-bottom:1px solid var(--line-2);background:var(--sheet);display:flex;align-items:center;gap:.5rem}
+.chklist h4 .ic{width:1.1rem;height:1.1rem;stroke:var(--navy-t)}
+.chklist ul{list-style:none;margin:0;padding:1.05rem 1.15rem;display:grid;gap:.6rem}
+@media (min-width:620px){.chklist ul{grid-template-columns:1fr 1fr;gap:.65rem 1.75rem}}
+.chklist li{display:flex;gap:.55rem;font-size:.8125rem;color:var(--ink-2);line-height:1.65}
+.chklist li .ic{width:.95rem;height:.95rem;flex:none;stroke:var(--leaf-t);margin-top:.28rem}
+.chklist li b{color:var(--ink);font-weight:600}
+.fees{display:flex;flex-wrap:wrap;gap:.45rem 1.5rem;align-items:baseline;padding:.85rem 1.15rem;border-top:1px dashed var(--line-2);font-size:.75rem;color:var(--ink-3)}
+.fees span b{font-family:'IBM Plex Mono',monospace;font-size:1.0625rem;font-weight:600;color:var(--gold-t);margin-left:.35rem;letter-spacing:-.01em}
+.fees .cap{flex:1 1 12rem}
+.chk-ft{margin:0;padding:.75rem 1.15rem;border-top:1px solid var(--line-2);background:var(--sheet);font-size:.75rem;color:var(--ink-3);line-height:1.7}
+.chk-ft b{color:var(--ink);font-weight:600}
+
+.pay{margin:0}
+.pay-sheet{margin:0;background:var(--sheet);border:1px solid var(--line-2);padding:.6rem .6rem .55rem;box-shadow:var(--sh-2);transform:rotate(1deg)}
+.pay-sheet img{display:block;width:100%;height:auto}
+.pay-info{margin-top:2rem;border-top:2px solid var(--navy);padding-top:1.1rem}
+.pay-info dl{margin:1rem 0 0;display:grid;gap:.55rem}
+.pay-info dl > div{display:grid;grid-template-columns:6.25rem 1fr;gap:.15rem .9rem;align-items:baseline;font-size:.8125rem;border-bottom:1px dotted var(--line-2);padding-bottom:.5rem}
+.pay-info dt{color:var(--ink-3);font-size:.75rem}
+.pay-info dd{margin:0;font-weight:500}
+.pay-info dd.acct{font-family:'IBM Plex Mono',monospace;font-size:1.0625rem;font-weight:600;color:var(--navy-t);letter-spacing:-.01em}
+.pay-warn{margin:1.1rem 0 0;display:flex;gap:.55rem;font-size:.75rem;color:var(--rust);line-height:1.7}
+.pay-warn .ic{width:1.05rem;height:1.05rem;flex:none;stroke:var(--rust);margin-top:.15rem}
+.pay-info .btn{margin-top:1.1rem}
 
 /* ═══════════ ACTIVITIES MOSAIC ═══════════ */
 .mosaic{display:grid;gap:1.25rem;grid-template-columns:1fr}
@@ -609,6 +655,7 @@ footer ul a:hover{color:var(--gold-l)}
     <a href="#about">เกี่ยวกับสหกรณ์</a>
     <a href="#rates">อัตราดอกเบี้ย</a>
     <a href="#services">บริการสหกรณ์</a>
+    <a href="#forms">เอกสารและแบบฟอร์ม</a>
     <a href="#news">ข่าวสารและกิจกรรม</a>
     <a href="#board">คณะกรรมการ</a>
     <a href="#app">icoop siam</a>
@@ -656,6 +703,7 @@ footer ul a:hover{color:var(--gold-l)}
       <li><i>๒</i><span>หลักฐานการ<b>ประกอบอาชีพเกษตรกรรม</b>ในเขตพื้นที่ดำเนินงาน</span></li>
       <li><i>๓</i><span>ค่าธรรมเนียมแรกเข้าและ<b>ถือหุ้นขั้นต่ำ</b>ตามข้อบังคับ</span></li>
     </ol>
+    <a class="prep-link" href="#forms"><svg class="ic"><use href="#i-download"/></svg>ดาวน์โหลดใบสมัคร</a>
   </div>
 </section>
 
@@ -828,6 +876,90 @@ footer ul a:hover{color:var(--gold-l)}
       <img src="assets/farmer.jpg" alt="สมาชิกและเจ้าหน้าที่ร่วมเวทีโครงการส่งเสริมและพัฒนาสถาบันเกษตรกร" width="760" height="507">
       <figcaption>โครงการส่งเสริมและพัฒนาสถาบันเกษตรกร ร่วมกับสำนักงานสหกรณ์จังหวัดสงขลา</figcaption>
     </figure>
+  </div>
+</section>
+
+<!-- ══ FORMS & DOCUMENTS ══ -->
+<section class="sec forms" id="forms">
+  <div class="wrap">
+    <div class="sec-hd row">
+      <div>
+        <span class="eyebrow">ดาวน์โหลดเอกสาร</span>
+        <h2>เอกสารและแบบฟอร์ม<br>สำหรับสมาชิก</h2>
+        <p>พิมพ์แบบฟอร์มไปกรอกล่วงหน้าก่อนมาที่สำนักงาน ช่วยให้ยื่นเรื่องได้ในรอบเดียว หากต้องการฉบับจริงติดต่อขอรับได้ที่เคาน์เตอร์บริการ</p>
+      </div>
+      <a class="btn btn-line" href="#contact"><svg class="ic"><use href="#i-phone"/></svg>สอบถามเจ้าหน้าที่</a>
+    </div>
+
+    <div class="forms-grid">
+      <div>
+        <article class="doc">
+          <a class="doc-thumb" href="assets/forms/membership-application.pdf" target="_blank" rel="noopener noreferrer">
+            <img src="assets/forms/thumb-membership.jpg" alt="ตัวอย่างหน้ารายการเอกสารที่ใช้ในการสมัครสมาชิก" width="640" height="900" loading="lazy">
+          </a>
+          <div class="doc-bd">
+            <span class="lbl">แบบฟอร์มที่ ๑</span>
+            <h3>ใบสมัครเข้าเป็นสมาชิกสหกรณ์</h3>
+            <p>หนังสือของประธานกลุ่มเสนอชื่อผู้สมัครต่อผู้จัดการสหกรณ์ พร้อมรายการเอกสารที่ต้องเตรียม ค่าธรรมเนียมแรกเข้าและค่าหุ้น และช่องเขียนแผนที่บ้าน — รับสมาชิกใหม่วันที่ ๑–๘ ของทุกเดือน</p>
+            <div class="doc-ft">
+              <span class="meta">PDF · ๒ หน้า · 163 KB</span>
+              <a class="btn btn-solid" href="assets/forms/membership-application.pdf" download><svg class="ic"><use href="#i-download"/></svg>ดาวน์โหลดแบบฟอร์ม</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="doc">
+          <a class="doc-thumb" href="assets/forms/loan-guarantee.pdf" target="_blank" rel="noopener noreferrer">
+            <img src="assets/forms/thumb-loan.jpg" alt="ตัวอย่างหนังสือรับรองให้สมาชิกสหกรณ์กู้เงิน" width="640" height="905" loading="lazy">
+          </a>
+          <div class="doc-bd">
+            <span class="lbl">แบบฟอร์มที่ ๒</span>
+            <h3>หนังสือรับรองให้สมาชิกกู้เงิน</h3>
+            <p>สำหรับประธานกลุ่มและเลขานุการกลุ่มรับรองวัตถุประสงค์การกู้ของสมาชิก มีช่องเลือกวัตถุประสงค์ ๑๓ รายการ ตั้งแต่ค่าปุ๋ยและพันธุ์พืช ไปจนถึงลงทุนซื้อหุ้นสหกรณ์</p>
+            <div class="doc-ft">
+              <span class="meta">PDF · ๑ หน้า · 101 KB</span>
+              <a class="btn btn-solid" href="assets/forms/loan-guarantee.pdf" download><svg class="ic"><use href="#i-download"/></svg>ดาวน์โหลดแบบฟอร์ม</a>
+            </div>
+          </div>
+        </article>
+
+        <div class="chklist">
+          <h4><svg class="ic"><use href="#i-check"/></svg>เอกสารที่ต้องนำมาในวันสมัครสมาชิก</h4>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg><span><b>บัตรประชาชนตัวจริง</b> ที่ยังไม่หมดอายุ</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span><b>ทะเบียนบ้านตัวจริง</b> ผู้สมัครต้องเป็นเจ้าบ้านหรือบุตรเจ้าบ้าน</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span><b>โฉนดที่ทำกิน หรือ น.ส.๓ ก</b> ของตนเอง บิดามารดา หรือคู่สมรส ใช้สำเนาหรือตัวจริงก็ได้</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span><b>หนังสือรับรองจากประธานกลุ่ม</b> ตามแบบฟอร์มที่ ๑</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span><b>คู่สมรสมาด้วยในวันสมัคร</b> พร้อมบัตรประชาชนและทะเบียนบ้าน</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>ทะเบียนสมรส ใบหย่า หรือใบมรณบัตร <b>(ถ้ามี)</b></span></li>
+          </ul>
+          <div class="fees">
+            <span class="cap">ค่าหุ้น ค่าธรรมเนียมแรกเข้า และเงินสัจจะ เตรียมมาเป็นเงินสด</span>
+            <span>๑ คน<b>1,300 บาท</b></span>
+            <span>๒ คน<b>1,950 บาท</b></span>
+          </div>
+          <p class="chk-ft"><b>รับสมาชิกใหม่วันที่ ๑–๘ ของทุกเดือน</b> ผู้สมัครต้องมีอายุไม่เกิน ๕๐ ปี และไม่ประกอบอาชีพรับราชการ · สอบถามเพิ่มเติม โทร. 074-552248</p>
+        </div>
+      </div>
+
+      <aside class="pay">
+        <figure class="pay-sheet">
+          <img src="assets/forms/payment-channels-web.jpg" alt="ประกาศช่องทางการชำระเงินของสหกรณ์ ธนาคารกรุงเทพ สาขาตลาดพงศ์เจริญ หาดใหญ่ ชื่อบัญชีสหกรณ์การเกษตรหาดใหญ่ จำกัด เลขที่บัญชี 764-0-16438-5" width="1000" height="1000" loading="lazy">
+        </figure>
+        <div class="pay-info">
+          <span class="eyebrow">ช่องทางการชำระเงิน</span>
+          <dl>
+            <div><dt>ธนาคาร</dt><dd>กรุงเทพ สาขาตลาดพงศ์เจริญ หาดใหญ่</dd></div>
+            <div><dt>ชื่อบัญชี</dt><dd>สหกรณ์การเกษตรหาดใหญ่ จำกัด</dd></div>
+            <div><dt>เลขที่บัญชี</dt><dd class="acct">764-0-16438-5</dd></div>
+            <div><dt>เวลาโอน</dt><dd>08.30–15.30 น. เฉพาะวันทำการ</dd></div>
+            <div><dt>ส่งหลักฐาน</dt><dd>LINE ID : @433tpgya</dd></div>
+          </dl>
+          <p class="pay-warn"><svg class="ic"><use href="#i-info"/></svg><span>รับโอนเงินชำระ<b>เฉพาะค่าสินค้าและเงินกู้</b>เท่านั้น และกรุณาสอบถามยอดชำระกับเจ้าหน้าที่สหกรณ์ก่อนโอนทุกครั้ง</span></p>
+          <a class="btn btn-line" href="assets/forms/payment-channels.jpg" download><svg class="ic"><use href="#i-download"/></svg>บันทึกภาพประกาศ</a>
+        </div>
+      </aside>
+    </div>
   </div>
 </section>
 
@@ -1098,6 +1230,7 @@ footer ul a:hover{color:var(--gold-l)}
           <li><a href="#about">เกี่ยวกับสหกรณ์</a></li>
           <li><a href="#rates">อัตราดอกเบี้ย</a></li>
           <li><a href="#services">บริการสหกรณ์</a></li>
+          <li><a href="#forms">เอกสารและแบบฟอร์ม</a></li>
           <li><a href="#news">ข่าวสารและกิจกรรม</a></li>
           <li><a href="#board">คณะกรรมการ ชุดที่ ๕๘</a></li>
           <li><a href="#contact">ติดต่อเรา</a></li>
@@ -1161,7 +1294,8 @@ footer ul a:hover{color:var(--gold-l)}
   var msgs=[
     'เปิดรับคำขอกู้สามัญรอบใหม่ ประจำปีบัญชี ๒๕๖๘ ยื่นเอกสารได้ที่สำนักงานใหญ่ ควนลัง หาดใหญ่',
     'เงินฝากออมทรัพย์พิเศษ อัตราดอกเบี้ย 2.50% ต่อปี ได้รับยกเว้นภาษี เปิดบัญชีได้ทุกวันทำการ',
-    'สมาชิกตรวจสอบยอดหุ้นและหนี้คงเหลือผ่านแอป icoop siam ได้ตลอด ๒๔ ชั่วโมง'
+    'สมาชิกตรวจสอบยอดหุ้นและหนี้คงเหลือผ่านแอป icoop siam ได้ตลอด ๒๔ ชั่วโมง',
+    'ดาวน์โหลดใบสมัครสมาชิกและหนังสือรับรองเงินกู้ได้แล้วที่หัวข้อเอกสารและแบบฟอร์ม'
   ],el=document.getElementById('tk'),i=0;
   if(el && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     setInterval(function(){
