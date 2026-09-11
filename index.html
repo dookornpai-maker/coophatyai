@@ -168,7 +168,8 @@ button,input,select{font:inherit;color:inherit}
 .hero-shot{position:relative;padding:0 .95rem .95rem 0}
 .hero-shot::before{content:"";position:absolute;right:0;bottom:0;width:78%;height:82%;background:var(--navy)}
 .hero-shot::after{content:"";position:absolute;left:-.5rem;top:1.6rem;width:.3rem;height:4.5rem;background:var(--gold)}
-.hero-shot img{position:relative;display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 58%}
+.hero-clip{position:relative;overflow:hidden}
+.hero-shot img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 58%}
 .hero-art figcaption{margin-top:1.15rem;padding-left:.9rem;border-left:3px solid var(--gold);font-size:.75rem;color:var(--ink-3);line-height:1.65;max-width:38ch}
 .hero-art figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.8125rem;margin-bottom:.15rem}
 
@@ -337,24 +338,51 @@ button,input,select{font:inherit;color:inherit}
 
 /* ═══════════ BOARD ═══════════ */
 .board{background:var(--paper-2);border-block:1px solid var(--line)}
-.lead3{display:grid;gap:1.5rem;grid-template-columns:1fr;margin-bottom:2.5rem}
+.disc{border:1px solid var(--line);background:var(--sheet);box-shadow:var(--sh-1)}
+.disc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:1.1rem;padding:1rem 1.25rem;transition:background .18s}
+.disc summary::-webkit-details-marker{display:none}
+.disc summary:hover{background:var(--paper-2)}
+.stack{display:flex;flex:none;align-items:center}
+.stack img{width:2.6rem;height:2.6rem;border-radius:50%;object-fit:cover;border:2px solid var(--sheet);margin-left:-.8rem;background:var(--paper-2);transition:margin-left .28s cubic-bezier(.3,1.1,.5,1)}
+.stack img:first-child{margin-left:0}
+.stack i{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:.6875rem;font-weight:600;width:2.6rem;height:2.6rem;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:var(--on-navy);border:2px solid var(--sheet);margin-left:-.8rem;transition:margin-left .28s cubic-bezier(.3,1.1,.5,1)}
+.disc summary:hover .stack img,.disc summary:hover .stack i{margin-left:-.45rem}
+.disc summary:hover .stack img:first-child{margin-left:0}
+.disc .lbl{min-width:0}
+.disc .lbl b{display:block;font-size:.9375rem;font-weight:600}
+.disc .lbl span{display:block;font-size:.75rem;color:var(--ink-3);line-height:1.55}
+.disc .chev{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:.45rem;font-size:.75rem;font-weight:600;color:var(--navy-t);white-space:nowrap}
+.disc .chev .ic{width:1.1rem;height:1.1rem;transition:transform .28s ease}
+.disc[open] .chev .ic{transform:rotate(180deg)}
+.disc[open] .chev .open-t{display:none}
+.disc .chev .close-t{display:none}
+.disc[open] .chev .close-t{display:inline}
+.disc-body{border-top:1px solid var(--line);padding:1.75rem 1.25rem 1.9rem;animation:reveal .3s ease both}
+@keyframes reveal{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+.lead3{display:grid;gap:1.5rem;grid-template-columns:repeat(2,1fr);margin-bottom:2rem}
 @media (min-width:640px){.lead3{grid-template-columns:repeat(3,1fr);gap:1.75rem}}
-.pcard{background:var(--sheet);border:1px solid var(--line);padding:.65rem .65rem 0;box-shadow:var(--sh-1)}
-.pcard img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;background:var(--sheet-2)}
-.pcard .cap{padding:.85rem .35rem 1rem;border-top:2px solid var(--gold);margin-top:.65rem}
-.pcard .role{font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-t);font-weight:600}
-.pcard h3{font-size:1.0625rem;margin-top:.2rem}
-.pcard.chair{border-top:4px solid var(--navy)}
-.rest{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-@media (min-width:560px){.rest{grid-template-columns:repeat(3,1fr)}}
-@media (min-width:880px){.rest{grid-template-columns:repeat(6,1fr);gap:1.1rem}}
-.pmini{text-align:left}
-.pmini img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;border:1px solid var(--line);background:var(--sheet-2);filter:saturate(.92)}
-.pmini b{display:block;font-size:.8125rem;font-weight:600;margin-top:.5rem;line-height:1.4}
+.pcard{margin:0;text-align:center;padding:0 .5rem}
+.pcard img{width:clamp(6rem,14vw,8rem);height:clamp(6rem,14vw,8rem);border-radius:50%;object-fit:cover;margin-inline:auto;background:var(--paper-2);box-shadow:0 0 0 3px var(--sheet),0 0 0 4px var(--line-2);transition:box-shadow .25s,transform .25s}
+.pcard:hover img{transform:translateY(-3px);box-shadow:0 0 0 3px var(--sheet),0 0 0 5px var(--navy)}
+.pcard.chair img{box-shadow:0 0 0 3px var(--sheet),0 0 0 5px var(--navy)}
+.pcard .cap{margin-top:.9rem}
+.pcard .role{display:block;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-t);font-weight:600}
+.pcard h3{font-size:1rem;margin-top:.2rem}
+
+.rest{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem .75rem;padding-top:1.75rem;border-top:1px solid var(--line)}
+@media (min-width:560px){.rest{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:900px){.rest{grid-template-columns:repeat(6,1fr);gap:1.75rem 1rem}}
+.pmini{margin:0;text-align:center}
+.pmini img{width:4.25rem;height:4.25rem;border-radius:50%;object-fit:cover;margin-inline:auto;background:var(--paper-2);box-shadow:0 0 0 2px var(--sheet),0 0 0 3px var(--line);transition:box-shadow .22s,transform .22s}
+.pmini:hover img{transform:translateY(-2px);box-shadow:0 0 0 2px var(--sheet),0 0 0 3px var(--gold)}
+.pmini b{display:block;font-size:.75rem;font-weight:600;margin-top:.6rem;line-height:1.45}
 .pmini span{display:block;font-size:.6875rem;color:var(--ink-3)}
+
 .gov{margin-top:2.5rem;display:grid;gap:1.5rem;grid-template-columns:1fr}
 @media (min-width:820px){.gov{grid-template-columns:repeat(4,1fr);gap:0}}
-.gov > div{padding:1.1rem 0;border-top:2px solid var(--line-2)}
+.gov > div{padding:1.1rem 0;border-top:2px solid var(--line-2);transition:border-color .25s}
+.gov > div:hover{border-top-color:var(--navy)}
 @media (min-width:820px){.gov > div{padding:1.1rem 1.5rem 1.1rem 0}}
 .gov h4{font-size:.9375rem}
 .gov p{font-size:.75rem;color:var(--ink-3);margin-top:.35rem;line-height:1.7}
@@ -438,6 +466,79 @@ footer ul a:hover{color:var(--gold-l)}
 .fbot{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.11);display:flex;flex-wrap:wrap;gap:.6rem 1.5rem;justify-content:space-between;font-size:.75rem}
 .fbot nav{display:flex;flex-wrap:wrap;gap:1.25rem}
 .fbot a:hover{color:var(--gold-l)}
+
+/* ═══════════ MICRO-DETAILS ═══════════ */
+.btn{position:relative;overflow:hidden;isolation:isolate;transition:background .18s,color .18s,border-color .18s,transform .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn .ic{transition:transform .2s ease}
+.btn:hover .ic{transform:scale(1.1)}
+.btn-solid{box-shadow:0 1px 0 rgba(0,0,0,.12)}
+.btn-solid:hover{box-shadow:0 6px 16px -8px rgba(12,23,70,.7)}
+.btn-solid::after,.btn-gold::after{content:"";position:absolute;right:-7px;bottom:-7px;width:15px;height:15px;background:var(--gold-l);transform:rotate(45deg) scale(0);transition:transform .26s cubic-bezier(.3,1.25,.5,1);z-index:-1}
+.btn-gold::after{background:#fff}
+.btn-solid:hover::after,.btn-gold:hover::after{transform:rotate(45deg) scale(1)}
+.btn-line::before{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .26s ease}
+.btn-line:hover::before{transform:scaleX(1)}
+
+/* cards: gold rule draws in, photo eases closer */
+.tile{position:relative;overflow:hidden;transition:box-shadow .22s,transform .22s,border-color .22s}
+.tile:hover{transform:translateY(-3px)}
+.tile::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .32s ease;z-index:4}
+.tile:hover::before{transform:scaleX(1)}
+.shot{overflow:hidden}
+.shot img{transition:transform .55s cubic-bezier(.2,.7,.3,1)}
+.tile:hover .shot img{transform:scale(1.06)}
+.t-lead img{transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+.t-lead:hover img{transform:scale(1.05)}
+.tile .kick{display:inline-flex;align-items:center;gap:.45rem}
+.tile .kick::before{content:"";width:.4rem;height:.4rem;background:currentColor;transform:rotate(45deg);flex:none}
+
+/* service rows: outline numeral fills, hairline turns navy */
+.svc{position:relative}
+.svc::before{content:"";position:absolute;top:-1px;left:0;width:0;height:1px;background:var(--navy);transition:width .4s ease}
+.svc:hover::before{width:100%}
+.svc .n{transition:color .28s ease,-webkit-text-stroke-color .28s ease}
+.svc:hover .n{color:var(--gold);-webkit-text-stroke-color:var(--gold)}
+.svc h3{transition:color .2s}
+.svc:hover h3{color:var(--navy-t)}
+
+/* framed photos */
+.print{transition:transform .3s ease,box-shadow .3s ease}
+.print:hover{transform:rotate(0deg) translateY(-3px);box-shadow:var(--sh-3)}
+.hero-shot img{transition:transform .55s cubic-bezier(.2,.7,.3,1)}
+.hero-art:hover .hero-shot img{transform:scale(1.04)}
+.svc-photo{overflow:hidden}
+.svc-photo img{transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+.svc-photo:hover img{transform:scale(1.04)}
+
+/* partner links */
+.partners a h4 .ic{transition:transform .2s ease}
+.partners a:hover h4 .ic{transform:translate(2px,-2px)}
+.partners a{transition:background .2s,border-color .2s}
+.partners a:hover{background:var(--paper-2)}
+
+/* rate rows */
+.rrow{transition:background .2s}
+.rrow:hover{background:var(--paper-2)}
+.rrow.hi:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 18%,transparent),transparent 72%)}
+
+/* navy fields get a faint printed-paper grain */
+.prep{background-image:radial-gradient(rgba(255,255,255,.085) 1px,transparent 1px);background-size:15px 15px}
+.calcband{background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:19px 19px}
+.t-note{background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:15px 15px}
+
+/* nav underline grows */
+.navstrip a{position:relative}
+.navstrip a::after{content:"";position:absolute;left:.95rem;right:.95rem;bottom:-2px;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:center;transition:transform .24s ease}
+.navstrip a:hover::after{transform:scaleX(1)}
+.navstrip a.on::after{display:none}
+
+/* figures: gold tick under each number */
+.hero-figs div{position:relative}
+.hero-figs b::after{content:"";display:block;width:1.5rem;height:2px;background:var(--gold);margin-top:.35rem;transition:width .3s ease}
+.hero-figs div:hover b::after{width:3rem}
+
 .credit{margin-top:1rem;font-size:.6875rem;color:rgba(238,242,251,.38);line-height:1.7}
 </style>
 
@@ -461,6 +562,7 @@ footer ul a:hover{color:var(--gold-l)}
 <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.3a3.2 3.2 0 0 1 0 5.4M17 14.6a5.5 5.5 0 0 1 3.5 4.9"/></symbol>
 <symbol id="i-doc" viewBox="0 0 24 24"><path d="M13.5 3.5H7a1.5 1.5 0 0 0-1.5 1.5v14A1.5 1.5 0 0 0 7 20.5h10a1.5 1.5 0 0 0 1.5-1.5V8.5l-5-5Z"/><path d="M13.5 3.5v5h5M8.5 13h7M8.5 16.5h4.5"/></symbol>
 <symbol id="i-app" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 5.4h3M12 18.4h.01"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6"/></symbol>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
 <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3.5 9.5 12 4.5l8.5 5"/><path d="M5.5 9.5v9m4-9v9m5-9v9m4-9v9M3 18.5h18"/></symbol>
 <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V9m5 11V4.5m5 15.5v-8m5 8V7"/></symbol>
@@ -540,7 +642,7 @@ footer ul a:hover{color:var(--gold-l)}
     </div>
 
     <figure class="hero-art">
-      <div class="hero-shot"><img src="assets/learning.jpg" alt="ศูนย์การเรียนรู้ทางการเกษตร สหกรณ์การเกษตรหาดใหญ่ จำกัด ณ ตำบลควนลัง" width="1000" height="664"></div>
+      <div class="hero-shot"><div class="hero-clip"><img src="assets/learning.jpg" alt="ศูนย์การเรียนรู้ทางการเกษตร สหกรณ์การเกษตรหาดใหญ่ จำกัด ณ ตำบลควนลัง" width="1000" height="664"></div></div>
       <figcaption><b>ศูนย์การเรียนรู้ทางการเกษตร สกก.หาดใหญ่</b>แหล่งถ่ายทอดความรู้และเทคโนโลยีการเกษตรให้สมาชิกและเยาวชนในพื้นที่</figcaption>
     </figure>
   </div>
@@ -755,7 +857,7 @@ footer ul a:hover{color:var(--gold-l)}
       </article>
 
       <article class="tile t-a">
-        <img src="assets/visit.jpg" alt="จอฉายต้อนรับคณะศึกษาดูงานจากสหกรณ์การเกษตรจะนะ จำกัด" width="760" height="505">
+        <div class="shot"><img src="assets/visit.jpg" alt="จอฉายต้อนรับคณะศึกษาดูงานจากสหกรณ์การเกษตรจะนะ จำกัด" width="760" height="505"></div>
         <div class="bd">
           <span class="kick">เครือข่ายสหกรณ์</span>
           <h3>ต้อนรับคณะศึกษาดูงาน</h3>
@@ -765,7 +867,7 @@ footer ul a:hover{color:var(--gold-l)}
       </article>
 
       <article class="tile t-b">
-        <img src="assets/learning.jpg" alt="พิธีเปิดศูนย์การเรียนรู้ทางการเกษตร" width="760" height="505">
+        <div class="shot"><img src="assets/learning.jpg" alt="พิธีเปิดศูนย์การเรียนรู้ทางการเกษตร" width="760" height="505"></div>
         <div class="bd">
           <span class="kick">ศูนย์เรียนรู้</span>
           <h3>เปิดศูนย์การเรียนรู้ทางการเกษตร</h3>
@@ -775,7 +877,7 @@ footer ul a:hover{color:var(--gold-l)}
       </article>
 
       <article class="tile t-c">
-        <img src="assets/waste.jpg" alt="รถบรรทุกขยะรีไซเคิลในโครงการธนาคารขยะของสหกรณ์" width="760" height="505">
+        <div class="shot"><img src="assets/waste.jpg" alt="รถบรรทุกขยะรีไซเคิลในโครงการธนาคารขยะของสหกรณ์" width="760" height="505"></div>
         <div class="bd">
           <span class="kick">สิ่งแวดล้อม</span>
           <h3>โครงการธนาคารขยะ</h3>
@@ -785,7 +887,7 @@ footer ul a:hover{color:var(--gold-l)}
       </article>
 
       <article class="tile t-d">
-        <img src="assets/sports.jpg" alt="ขบวนพาเหรดงานแข่งขันกีฬาสหกรณ์สัมพันธ์" width="760" height="505">
+        <div class="shot"><img src="assets/sports.jpg" alt="ขบวนพาเหรดงานแข่งขันกีฬาสหกรณ์สัมพันธ์" width="760" height="505"></div>
         <div class="bd">
           <span class="kick">ชุมชนสัมพันธ์</span>
           <h3>กีฬาสหกรณ์สัมพันธ์</h3>
@@ -795,7 +897,7 @@ footer ul a:hover{color:var(--gold-l)}
       </article>
 
       <article class="tile t-e">
-        <img src="assets/farmer.jpg" alt="เวทีโครงการส่งเสริมและพัฒนาสถาบันเกษตรกร" width="760" height="507">
+        <div class="shot"><img src="assets/farmer.jpg" alt="เวทีโครงการส่งเสริมและพัฒนาสถาบันเกษตรกร" width="760" height="507"></div>
         <div class="bd">
           <span class="kick">ความร่วมมือภาครัฐ</span>
           <h3>โครงการส่งเสริมและพัฒนาสถาบันเกษตรกร</h3>
@@ -838,35 +940,47 @@ footer ul a:hover{color:var(--gold-l)}
       <p>คณะกรรมการ ๑๕ คน มาจากการเลือกตั้งของสมาชิกในที่ประชุมใหญ่สามัญประจำปี ทำหน้าที่กำหนดนโยบายและกำกับการดำเนินงานของสหกรณ์</p>
     </div>
 
-    <div class="lead3">
-      <figure class="pcard chair" style="margin:0">
-        <img src="assets/p01.jpg" alt="นายชูเชิด แก้วทิพย์ ประธานกรรมการ" width="440" height="550">
-        <figcaption class="cap"><span class="role">ประธานกรรมการ</span><h3>นายชูเชิด แก้วทิพย์</h3></figcaption>
-      </figure>
-      <figure class="pcard" style="margin:0">
-        <img src="assets/p02.jpg" alt="นายจารึก ผดุ้งกูล รองประธานกรรมการ คนที่ ๑" width="440" height="550">
-        <figcaption class="cap"><span class="role">รองประธานกรรมการ ๑</span><h3>นายจารึก ผดุ้งกูล</h3></figcaption>
-      </figure>
-      <figure class="pcard" style="margin:0">
-        <img src="assets/p03.jpg" alt="นายเซี้ยน แดงนวล รองประธานกรรมการ คนที่ ๒" width="440" height="550">
-        <figcaption class="cap"><span class="role">รองประธานกรรมการ ๒</span><h3>นายเซี้ยน แดงนวล</h3></figcaption>
-      </figure>
-    </div>
+    <details class="disc">
+      <summary>
+        <span class="stack" aria-hidden="true"><img src="assets/a01.jpg" alt="" width="320" height="320" loading="lazy"><img src="assets/a02.jpg" alt="" width="320" height="320" loading="lazy"><img src="assets/a03.jpg" alt="" width="320" height="320" loading="lazy"><img src="assets/a04.jpg" alt="" width="320" height="320" loading="lazy"><img src="assets/a05.jpg" alt="" width="320" height="320" loading="lazy"><img src="assets/a06.jpg" alt="" width="320" height="320" loading="lazy"><i>+๙</i></span>
+        <span class="lbl">
+          <b>รายนามคณะกรรมการ ๑๕ คน</b>
+          <span>ประธาน · รองประธาน ๒ · เหรัญญิก · เลขานุการ · กรรมการ ๑๐</span>
+        </span>
+        <span class="chev"><span class="open-t">ดูรายนาม</span><span class="close-t">ย่อเก็บ</span><svg class="ic"><use href="#i-chev"/></svg></span>
+      </summary>
 
-    <div class="rest">
-      <figure class="pmini" style="margin:0"><img src="assets/p04.jpg" alt="นายเจริญ สุขขวัญ เหรัญญิก" width="440" height="550"><b>นายเจริญ สุขขวัญ</b><span>เหรัญญิก</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p05.jpg" alt="นางปิยะลักษณ์ เพชรหยก เลขานุการ" width="440" height="550"><b>นางปิยะลักษณ์ เพชรหยก</b><span>เลขานุการ</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p06.jpg" alt="นายใจ สุวรรณการณ์ กรรมการ" width="440" height="550"><b>นายใจ สุวรรณการณ์</b><span>กรรมการ</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p07.jpg" alt="นางภิญโญ พานิช กรรมการ" width="440" height="550"><b>นางภิญโญ พานิช</b><span>กรรมการ</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p08.jpg" alt="นางสาวอาพร บุญวันนา กรรมการ" width="440" height="550"><b>นางสาวอาพร บุญวันนา</b><span>กรรมการ</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p09.jpg" alt="นางสาวขนิษฐา ดวงประดิษฐ์ กรรมการ" width="440" height="550"><b>นางสาวขนิษฐา ดวงประดิษฐ์</b><span>กรรมการ</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p10.jpg" alt="นายอภิชาติ รองสวัสดิ์ กรรมการ" width="440" height="550"><b>นายอภิชาติ รองสวัสดิ์</b><span>กรรมการ</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p11.jpg" alt="นางสาวสุภาพร วิริยะสมบัติ กรรมการ" width="440" height="550"><b>นางสาวสุภาพร วิริยะสมบัติ</b><span>กรรมการ</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p12.jpg" alt="นายสมมารถ นนท์สุวรรณ์ กรรมการ" width="440" height="550"><b>นายสมมารถ นนท์สุวรรณ์</b><span>กรรมการ</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p13.jpg" alt="นายศิริพงค์ คุณารักษ์ กรรมการ" width="440" height="550"><b>นายศิริพงค์ คุณารักษ์</b><span>กรรมการ</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p14.jpg" alt="นายพร ทองแจ่มแจ้ง กรรมการ" width="440" height="550"><b>นายพร ทองแจ่มแจ้ง</b><span>กรรมการ</span></figure>
-      <figure class="pmini" style="margin:0"><img src="assets/p15.jpg" alt="นางอรุณี รัตนะพันธ์ กรรมการ" width="440" height="550"><b>นางอรุณี รัตนะพันธ์</b><span>กรรมการ</span></figure>
-    </div>
+      <div class="disc-body">
+        <div class="lead3">
+        <figure class="pcard chair">
+          <img src="assets/a01.jpg" alt="นายชูเชิด แก้วทิพย์ ประธานกรรมการ" width="320" height="320" loading="lazy">
+          <figcaption class="cap"><span class="role">ประธานกรรมการ</span><h3>นายชูเชิด แก้วทิพย์</h3></figcaption>
+        </figure>
+        <figure class="pcard">
+          <img src="assets/a02.jpg" alt="นายจารึก ผดุ้งกูล รองประธานกรรมการ ๑" width="320" height="320" loading="lazy">
+          <figcaption class="cap"><span class="role">รองประธานกรรมการ ๑</span><h3>นายจารึก ผดุ้งกูล</h3></figcaption>
+        </figure>
+        <figure class="pcard">
+          <img src="assets/a03.jpg" alt="นายเซี้ยน แดงนวล รองประธานกรรมการ ๒" width="320" height="320" loading="lazy">
+          <figcaption class="cap"><span class="role">รองประธานกรรมการ ๒</span><h3>นายเซี้ยน แดงนวล</h3></figcaption>
+        </figure>
+        </div>
+        <div class="rest">
+        <figure class="pmini"><img src="assets/a04.jpg" alt="นายเจริญ สุขขวัญ เหรัญญิก" width="320" height="320" loading="lazy"><b>นายเจริญ สุขขวัญ</b><span>เหรัญญิก</span></figure>
+        <figure class="pmini"><img src="assets/a05.jpg" alt="นางปิยะลักษณ์ เพชรหยก เลขานุการ" width="320" height="320" loading="lazy"><b>นางปิยะลักษณ์ เพชรหยก</b><span>เลขานุการ</span></figure>
+        <figure class="pmini"><img src="assets/a06.jpg" alt="นายใจ สุวรรณการณ์ กรรมการ" width="320" height="320" loading="lazy"><b>นายใจ สุวรรณการณ์</b><span>กรรมการ</span></figure>
+        <figure class="pmini"><img src="assets/a07.jpg" alt="นางภิญโญ พานิช กรรมการ" width="320" height="320" loading="lazy"><b>นางภิญโญ พานิช</b><span>กรรมการ</span></figure>
+        <figure class="pmini"><img src="assets/a08.jpg" alt="นางสาวอาพร บุญวันนา กรรมการ" width="320" height="320" loading="lazy"><b>นางสาวอาพร บุญวันนา</b><span>กรรมการ</span></figure>
+        <figure class="pmini"><img src="assets/a09.jpg" alt="นางสาวขนิษฐา ดวงประดิษฐ์ กรรมการ" width="320" height="320" loading="lazy"><b>นางสาวขนิษฐา ดวงประดิษฐ์</b><span>กรรมการ</span></figure>
+        <figure class="pmini"><img src="assets/a10.jpg" alt="นายอภิชาติ รองสวัสดิ์ กรรมการ" width="320" height="320" loading="lazy"><b>นายอภิชาติ รองสวัสดิ์</b><span>กรรมการ</span></figure>
+        <figure class="pmini"><img src="assets/a11.jpg" alt="นางสาวสุภาพร วิริยะสมบัติ กรรมการ" width="320" height="320" loading="lazy"><b>นางสาวสุภาพร วิริยะสมบัติ</b><span>กรรมการ</span></figure>
+        <figure class="pmini"><img src="assets/a12.jpg" alt="นายสมมารถ นนท์สุวรรณ์ กรรมการ" width="320" height="320" loading="lazy"><b>นายสมมารถ นนท์สุวรรณ์</b><span>กรรมการ</span></figure>
+        <figure class="pmini"><img src="assets/a13.jpg" alt="นายศิริพงค์ คุณารักษ์ กรรมการ" width="320" height="320" loading="lazy"><b>นายศิริพงค์ คุณารักษ์</b><span>กรรมการ</span></figure>
+        <figure class="pmini"><img src="assets/a14.jpg" alt="นายพร ทองแจ่มแจ้ง กรรมการ" width="320" height="320" loading="lazy"><b>นายพร ทองแจ่มแจ้ง</b><span>กรรมการ</span></figure>
+        <figure class="pmini"><img src="assets/a15.jpg" alt="นางอรุณี รัตนะพันธ์ กรรมการ" width="320" height="320" loading="lazy"><b>นางอรุณี รัตนะพันธ์</b><span>กรรมการ</span></figure>
+        </div>
+      </div>
+    </details>
 
     <div class="gov">
       <div><span class="step">ลำดับที่ ๑</span><h4>ที่ประชุมใหญ่สามัญประจำปี</h4><p>อำนาจสูงสุดของสหกรณ์ สมาชิกทุกคนมีสิทธิ์ออกเสียงหนึ่งเสียงเท่ากัน</p></div>
